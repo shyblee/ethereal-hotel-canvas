@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import IntroSection from '@/components/IntroSection';
@@ -9,26 +9,36 @@ import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import RippleEffect from '@/components/RippleEffect';
 import cloudyBg from '@/assets/cloudy-bg.jpg';
-import { useRef } from 'react';
+
+console.log('Index component loading...');
 
 const Index = () => {
+  console.log('Index component rendering...');
   const pageRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
+    console.log('Index useEffect running...');
+    try {
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
       });
-    });
+      console.log('Smooth scrolling initialized');
+    } catch (error) {
+      console.error('Error in useEffect:', error);
+    }
   }, []);
+
+  console.log('About to render Index component...');
 
   return (
     <div 
@@ -75,5 +85,7 @@ const Index = () => {
     </div>
   );
 };
+
+console.log('Index component defined');
 
 export default Index;
