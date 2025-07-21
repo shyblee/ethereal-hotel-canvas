@@ -1,10 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import hero1 from '@/assets/hero-1.jpg';
 import hero2 from '@/assets/hero-2.jpg';
 import hero3 from '@/assets/hero-3.jpg';
 import cloudyBg from '@/assets/cloudy-bg.jpg';
+import RippleEffect from './RippleEffect';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const heroImages = [
   { src: hero1, title: 'Luxury Redefined', subtitle: 'Experience unparalleled elegance' },
@@ -22,7 +26,25 @@ export default function HeroSection() {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % heroImages.length);
     }, 6000);
-    return () => clearInterval(interval);
+
+    // Parallax effect for hero section
+    if (heroRef.current) {
+      gsap.to(heroRef.current, {
+        yPercent: -20,
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+    }
+
+    return () => {
+      clearInterval(interval);
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -96,7 +118,8 @@ export default function HeroSection() {
         backgroundAttachment: 'fixed',
       }}
     >
-      {/* Ripple container */}
+      {/* Enhanced Ripple Effects */}
+      <RippleEffect containerRef={heroRef} />
       <div ref={rippleRef} className="absolute inset-0 pointer-events-none" />
       
       {/* Background overlay */}

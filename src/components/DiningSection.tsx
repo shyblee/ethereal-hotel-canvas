@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
-import { Star, Clock, Users } from 'lucide-react';
+import { Star, Clock, Users, ChefHat, Award, Utensils } from 'lucide-react';
+import RippleEffect from './RippleEffect';
+import { useRef } from 'react';
 
 const dishes = [
   {
@@ -32,9 +34,12 @@ const dishes = [
 ];
 
 export default function DiningSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
   return (
-    <section id="dining" className="py-20 bg-hero">
-      <div className="container mx-auto px-6">
+    <section ref={sectionRef} id="dining" className="py-20 bg-hero relative overflow-hidden">
+      <RippleEffect containerRef={sectionRef} />
+      <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -117,6 +122,47 @@ export default function DiningSection() {
             </motion.div>
           ))}
         </div>
+
+        {/* Chef's specialties */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          viewport={{ once: true }}
+          className="mt-20 text-center"
+        >
+          <h3 className="text-4xl font-light text-foreground mb-12">
+            Chef's <span className="bg-gradient-luxury bg-clip-text text-transparent">Signature</span> Experience
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {[
+              { icon: ChefHat, title: "Master Chef", desc: "Michelin-starred expertise" },
+              { icon: Award, title: "Award Winning", desc: "Internationally recognized" },
+              { icon: Utensils, title: "Farm to Table", desc: "Fresh local ingredients" }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="w-16 h-16 mx-auto mb-4 bg-gradient-primary rounded-full flex items-center justify-center"
+                >
+                  <item.icon className="w-8 h-8 text-white" />
+                </motion.div>
+                <h4 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                  {item.title}
+                </h4>
+                <p className="text-muted-foreground">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Restaurant ambiance section */}
         <motion.div

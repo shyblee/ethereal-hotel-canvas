@@ -4,11 +4,16 @@ import HeroSection from '@/components/HeroSection';
 import IntroSection from '@/components/IntroSection';
 import FeaturesSection from '@/components/FeaturesSection';
 import DiningSection from '@/components/DiningSection';
+import DestinationsSection from '@/components/DestinationsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import RippleEffect from '@/components/RippleEffect';
 import cloudyBg from '@/assets/cloudy-bg.jpg';
+import { useRef } from 'react';
 
 const Index = () => {
+  const pageRef = useRef<HTMLDivElement>(null);
+  
   useEffect(() => {
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -27,6 +32,7 @@ const Index = () => {
 
   return (
     <div 
+      ref={pageRef}
       className="min-h-screen bg-background relative"
       style={{
         backgroundImage: `url(${cloudyBg})`,
@@ -35,6 +41,9 @@ const Index = () => {
         backgroundPosition: 'center',
       }}
     >
+      {/* Global Ripple Effects */}
+      <RippleEffect containerRef={pageRef} />
+      
       {/* Background overlay */}
       <div className="fixed inset-0 bg-background/80 pointer-events-none" />
       
@@ -53,6 +62,9 @@ const Index = () => {
           </section>
           <section id="dining">
             <DiningSection />
+          </section>
+          <section id="destinations">
+            <DestinationsSection />
           </section>
           <section id="contact">
             <ContactSection />

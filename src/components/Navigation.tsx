@@ -5,11 +5,11 @@ import { Button } from '@/components/ui/button';
 
 const navItems = [
   { name: 'Home', href: '#home', image: '/hero-1.jpg' },
-  { name: 'Suites', href: '#suites', image: '/hero-2.jpg' },
-  { name: 'Spa', href: '#spa', image: '/hero-3.jpg' },
+  { name: 'About', href: '#about', image: '/hero-2.jpg' },
+  { name: 'Features', href: '#features', image: '/hero-3.jpg' },
   { name: 'Dining', href: '#dining', image: '/dining-1.jpg' },
-  { name: 'Activities', href: '#activities', image: '/feature-1.jpg' },
-  { name: 'Events', href: '#events', image: '/hero-1.jpg' },
+  { name: 'Destinations', href: '#destinations', image: '/feature-1.jpg' },
+  { name: 'Wellness', href: '#wellness', image: '/hero-1.jpg' },
   { name: 'Contact', href: '#contact', image: '/hero-2.jpg' },
 ];
 

@@ -3,11 +3,16 @@ import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import RippleEffect from './RippleEffect';
+import { useRef } from 'react';
 
 export default function ContactSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
   return (
-    <section id="contact" className="py-20 bg-background">
-      <div className="container mx-auto px-6">
+    <section ref={sectionRef} id="contact" className="py-20 bg-background relative overflow-hidden">
+      <RippleEffect containerRef={sectionRef} />
+      <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
