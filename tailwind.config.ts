@@ -18,6 +18,20 @@ export default {
 			}
 		},
 		extend: {
+			backgroundImage: {
+				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-luxury': 'var(--gradient-luxury)',
+				'gradient-emerald': 'var(--gradient-emerald)',
+			},
+			boxShadow: {
+				'soft': 'var(--shadow-soft)',
+				'luxury': 'var(--shadow-luxury)',
+				'hero': 'var(--shadow-hero)',
+			},
+			transitionTimingFunction: {
+				'luxury': 'cubic-bezier(0.23, 1, 0.32, 1)',
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -43,6 +57,14 @@ export default {
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
 					foreground: 'hsl(var(--accent-foreground))'
+				},
+				hero: {
+					DEFAULT: 'hsl(var(--hero))',
+					foreground: 'hsl(var(--hero-foreground))'
+				},
+				luxury: {
+					DEFAULT: 'hsl(var(--luxury))',
+					foreground: 'hsl(var(--luxury-foreground))'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
