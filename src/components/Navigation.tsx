@@ -5,17 +5,24 @@ import { Button } from '@/components/ui/button';
 
 const navItems = [
   { name: 'Home', href: '#home', image: '/hero-1.jpg' },
-  { name: 'About', href: '#about', image: '/hero-2.jpg' },
-  { name: 'Features', href: '#features', image: '/hero-3.jpg' },
-  { name: 'Dining', href: '#dining', image: '/dining-1.jpg' },
-  { name: 'Destinations', href: '#destinations', image: '/feature-1.jpg' },
-  { name: 'Wellness', href: '#wellness', image: '/hero-1.jpg' },
-  { name: 'Contact', href: '#contact', image: '/hero-2.jpg' },
+  { name: 'About Us', href: '#about', image: '/hero-2.jpg' },
+  { name: 'Accommodation', href: '#accommodation', image: '/hero-3.jpg' },
+  { name: 'Events', href: '#events', image: '/hero-1.jpg' },
+  { name: 'Gallery', href: '#gallery', image: '/hero-2.jpg' },
+  { name: 'Contact Us', href: '#contact', image: '/hero-3.jpg' },
+];
+
+const navBarItems = [
+  { name: 'About Us', href: '#about' },
+  { name: 'Contact Us', href: '#contact' },
+  { name: 'Accommodation', href: '#accommodation' },
+  { name: 'Events', href: '#events' },
 ];
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,11 +51,35 @@ export default function Navigation() {
               EMERALD RESORT
             </motion.div>
             
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              {navBarItems.map((item) => (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  whileHover={{ scale: 1.05 }}
+                  className="text-foreground hover:text-primary transition-colors relative group"
+                >
+                  {item.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300" />
+                </motion.a>
+              ))}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsOpen(true)}
+                className="text-foreground hover:bg-primary/10"
+              >
+                <Menu className="h-6 w-6" />
+              </Button>
+            </div>
+
+            {/* Mobile menu button */}
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(true)}
-              className="text-foreground hover:bg-primary/10"
+              className="md:hidden text-foreground hover:bg-primary/10"
             >
               <Menu className="h-6 w-6" />
             </Button>
@@ -96,12 +127,22 @@ export default function Navigation() {
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ delay: 0.3 + index * 0.1 }}
                         onClick={() => setIsOpen(false)}
-                        className="block text-6xl font-light text-foreground hover:text-primary transition-colors group"
+                        onMouseEnter={() => setHoveredIndex(index)}
+                        className="block text-6xl font-light text-foreground hover:text-primary transition-all duration-300 group"
                       >
-                        <span className="relative">
+                        <motion.span 
+                          className="relative"
+                          whileHover={{ x: 20 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        >
                           {item.name}
-                          <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-500" />
-                        </span>
+                          <motion.span 
+                            className="absolute -bottom-2 left-0 h-0.5 bg-gradient-primary"
+                            initial={{ width: 0 }}
+                            whileHover={{ width: "100%" }}
+                            transition={{ duration: 0.3 }}
+                          />
+                        </motion.span>
                       </motion.a>
                     ))}
                   </motion.div>
@@ -115,11 +156,19 @@ export default function Navigation() {
                   className="w-1/2 relative overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-l from-transparent to-background/20" />
-                  <img
-                    src={navItems[0].image}
-                    alt="Preview"
-                    className="w-full h-full object-cover"
-                  />
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={hoveredIndex}
+                      src={navItems[hoveredIndex].image}
+                      alt="Preview"
+                      initial={{ opacity: 0, scale: 1.1 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.5 }}
+                      className="w-full h-full object-cover"
+                    />
+                  </AnimatePresence>
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent" />
                 </motion.div>
               </div>
 

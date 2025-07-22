@@ -112,6 +112,8 @@ export default function HeroSection() {
       onMouseMove={handleMouseMove}
       onClick={handleClick}
       style={{
+        height: '100vh',
+        minHeight: '100vh',
         backgroundImage: `url(${cloudyBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',

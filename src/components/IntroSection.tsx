@@ -17,21 +17,22 @@ export default function IntroSection() {
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1,
+        start: "top 80%",
+        end: "bottom 20%",
+        scrub: false,
+        once: true,
       }
     });
 
     timeline
       .fromTo(videoRef.current, 
-        { x: -100, opacity: 0.8 }, 
-        { x: 0, opacity: 1, duration: 1 }
+        { y: 50, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }
       )
       .fromTo(contentRef.current, 
-        { x: 100, opacity: 0.8 }, 
-        { x: 0, opacity: 1, duration: 1 }, 
-        "-=0.5"
+        { y: 50, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 
+        "-=0.4"
       );
 
     return () => {
@@ -60,7 +61,8 @@ export default function IntroSection() {
                 className="w-full h-[600px] object-cover"
                 poster="/hero-2.jpg"
               >
-                <source src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761" type="video/mp4" />
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
+                <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent" />
@@ -216,7 +218,8 @@ export default function IntroSection() {
                 className="w-full h-[600px] object-cover"
                 poster="/hero-3.jpg"
               >
-                <source src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761" type="video/mp4" />
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+                <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               <div className="absolute inset-0 bg-gradient-to-l from-primary/20 to-transparent" />
