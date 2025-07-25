@@ -37,7 +37,7 @@ export default function DiningSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section ref={sectionRef} id="dining" className="py-20 bg-hero relative overflow-hidden">
+    <section ref={sectionRef} id="dining" className="py-20 bg-background relative overflow-hidden">
       <RippleEffect containerRef={sectionRef} />
       <div className="container mx-auto px-6 relative z-10">
         <motion.div

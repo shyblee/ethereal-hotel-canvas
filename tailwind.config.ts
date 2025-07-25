@@ -17,6 +17,10 @@ export default {
 				'2xl': '1400px'
 			}
 		},
+		fontFamily: {
+			'heading': ['Inter', 'system-ui', 'sans-serif'],
+			'body': ['Inter', 'system-ui', 'sans-serif'],
+		},
 		extend: {
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
