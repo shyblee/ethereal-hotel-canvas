@@ -150,39 +150,24 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div className="text-center text-white max-w-4xl px-6">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -50, opacity: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <motion.h1
-                className="text-7xl md:text-8xl font-light mb-6 tracking-wider"
-                style={{ textShadow: '0 4px 20px rgba(0,0,0,0.3)' }}
-              >
-                {heroImages[currentIndex].title}
-              </motion.h1>
-              <motion.p
-                className="text-xl md:text-2xl font-light tracking-wide opacity-90"
-                style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
-              >
-                {heroImages[currentIndex].subtitle}
-              </motion.p>
-            </motion.div>
-          </AnimatePresence>
-          
+        <div className="text-center text-white max-w-6xl px-6">
           <motion.div
-            initial={{ y: 100, opacity: 0 }}
+            initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-            className="mt-12"
+            transition={{ duration: 1, delay: 0.5 }}
           >
-            <button className="px-12 py-4 bg-gradient-primary text-white rounded-full text-lg font-medium hover:shadow-luxury transition-all duration-500 hover:scale-105">
-              Discover Luxury
-            </button>
+            <motion.p
+              className="text-sm md:text-base font-light tracking-[0.3em] mb-8 opacity-90 uppercase"
+              style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
+            >
+              A Promise of Well-Being
+            </motion.p>
+            <motion.h1
+              className="text-5xl md:text-7xl lg:text-8xl font-light mb-16 tracking-wide font-heading"
+              style={{ textShadow: '0 4px 20px rgba(0,0,0,0.3)' }}
+            >
+              The villa hotel on Lanzarote
+            </motion.h1>
           </motion.div>
         </div>
       </div>

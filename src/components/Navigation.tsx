@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Instagram, Facebook, Twitter } from 'lucide-react';
+import { Menu, X, Instagram, Facebook, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const navItems = [
@@ -13,10 +13,9 @@ const navItems = [
 ];
 
 const navBarItems = [
-  { name: 'About Us', href: '#about' },
-  { name: 'Contact Us', href: '#contact' },
-  { name: 'Accommodation', href: '#accommodation' },
-  { name: 'Events', href: '#events' },
+  { name: 'VILLAS', href: '#villas' },
+  { name: 'GASTRONOMY', href: '#dining' },
+  { name: 'WELLNESS', href: '#wellness' },
 ];
 
 export default function Navigation() {
@@ -26,7 +25,7 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > window.innerHeight * 0.8);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -38,39 +37,56 @@ export default function Navigation() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? 'bg-card/80 backdrop-blur-lg shadow-soft' : 'bg-transparent'
+          scrolled ? 'bg-white/95 backdrop-blur-lg shadow-soft' : 'bg-transparent'
         }`}
       >
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
+            {/* Logo */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent"
+              className={`text-xl font-heading tracking-wider ${
+                scrolled ? 'text-primary' : 'text-white'
+              } transition-colors duration-300`}
             >
-              EMERALD RESORT
+              <span className="font-light">Kamezi</span>
+              <div className="text-xs tracking-widest opacity-80">BOUTIQUE VILLAS</div>
             </motion.div>
             
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            {/* Center Navigation */}
+            <div className="hidden md:flex items-center space-x-12">
               {navBarItems.map((item) => (
                 <motion.a
                   key={item.name}
                   href={item.href}
                   whileHover={{ scale: 1.05 }}
-                  className="text-foreground hover:text-primary transition-colors relative group"
+                  className={`text-sm tracking-widest font-medium transition-colors relative group ${
+                    scrolled ? 'text-primary hover:text-primary/80' : 'text-white hover:text-white/80'
+                  }`}
                 >
                   {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300" />
+                  <span className={`absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 ${
+                    scrolled ? 'bg-primary' : 'bg-white'
+                  }`} />
                 </motion.a>
               ))}
+            </div>
+
+            {/* Right side - Language and Book button */}
+            <div className="hidden md:flex items-center space-x-6">
+              <span className={`text-sm tracking-widest ${
+                scrolled ? 'text-primary' : 'text-white'
+              } transition-colors duration-300`}>EN</span>
               <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsOpen(true)}
-                className="text-foreground hover:bg-primary/10"
+                variant="outline"
+                className={`tracking-widest border-2 transition-all duration-300 ${
+                  scrolled 
+                    ? 'border-primary text-primary hover:bg-primary hover:text-white' 
+                    : 'border-white text-white hover:bg-white hover:text-primary'
+                }`}
               >
-                <Menu className="h-6 w-6" />
+                BOOK
               </Button>
             </div>
 
@@ -79,13 +95,49 @@ export default function Navigation() {
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(true)}
-              className="md:hidden text-foreground hover:bg-primary/10"
+              className={`md:hidden transition-colors ${
+                scrolled ? 'text-primary hover:bg-primary/10' : 'text-white hover:bg-white/10'
+              }`}
             >
               <Menu className="h-6 w-6" />
             </Button>
           </div>
         </div>
       </motion.nav>
+
+      {/* Social Media Buttons - Right Side */}
+      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 flex flex-col space-y-4">
+        <motion.a
+          href="#"
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          whileHover={{ scale: 1.1 }}
+          className="p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white hover:text-primary transition-all duration-300"
+        >
+          <MessageCircle className="h-5 w-5" />
+        </motion.a>
+        <motion.a
+          href="#"
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          whileHover={{ scale: 1.1 }}
+          className="p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white hover:text-primary transition-all duration-300"
+        >
+          <Instagram className="h-5 w-5" />
+        </motion.a>
+        <motion.a
+          href="#"
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.7 }}
+          whileHover={{ scale: 1.1 }}
+          className="p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white hover:text-primary transition-all duration-300"
+        >
+          <Facebook className="h-5 w-5" />
+        </motion.a>
+      </div>
 
       <AnimatePresence>
         {isOpen && (
@@ -179,7 +231,7 @@ export default function Navigation() {
                 transition={{ delay: 0.6 }}
                 className="absolute bottom-8 left-8 flex space-x-6"
               >
-                {[Instagram, Facebook, Twitter].map((Icon, index) => (
+                {[Instagram, Facebook, MessageCircle].map((Icon, index) => (
                   <motion.a
                     key={index}
                     href="#"
