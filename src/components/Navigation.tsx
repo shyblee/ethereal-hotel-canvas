@@ -25,7 +25,7 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > window.innerHeight * 0.8);
+      setScrolled(window.scrollY > 100); // Hero section scroll trigger
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -46,22 +46,22 @@ export default function Navigation() {
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
-              className={`text-xl font-heading tracking-wider ${
+              className={`text-xl font-headings tracking-wider ${
                 scrolled ? 'text-primary' : 'text-white'
               } transition-colors duration-300`}
             >
-              <span className="font-light">Kamezi</span>
-              <div className="text-xs tracking-widest opacity-80">BOUTIQUE VILLAS</div>
+              <span className="font-light">ETHEREAL</span>
+              <div className="text-xs tracking-widest opacity-80">HOTEL EXPERIENCE</div>
             </motion.div>
             
             {/* Center Navigation */}
-            <div className="hidden md:flex items-center space-x-12">
+            <div className="hidden lg:flex items-center space-x-12">
               {navBarItems.map((item) => (
                 <motion.a
                   key={item.name}
                   href={item.href}
                   whileHover={{ scale: 1.05 }}
-                  className={`text-sm tracking-widest font-medium transition-colors relative group ${
+                  className={`text-sm tracking-widest font-medium transition-colors relative group font-headings ${
                     scrolled ? 'text-primary hover:text-primary/80' : 'text-white hover:text-white/80'
                   }`}
                 >
@@ -74,19 +74,19 @@ export default function Navigation() {
             </div>
 
             {/* Right side - Language and Book button */}
-            <div className="hidden md:flex items-center space-x-6">
-              <span className={`text-sm tracking-widest ${
+            <div className="hidden lg:flex items-center space-x-6">
+              <span className={`text-sm tracking-widest font-headings ${
                 scrolled ? 'text-primary' : 'text-white'
               } transition-colors duration-300`}>EN</span>
               <Button
                 variant="outline"
-                className={`tracking-widest border-2 transition-all duration-300 ${
+                className={`tracking-widest border-2 transition-all duration-300 font-headings rounded-full ${
                   scrolled 
                     ? 'border-primary text-primary hover:bg-primary hover:text-white' 
                     : 'border-white text-white hover:bg-white hover:text-primary'
                 }`}
               >
-                BOOK
+                BOOK NOW
               </Button>
             </div>
 
@@ -95,7 +95,7 @@ export default function Navigation() {
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(true)}
-              className={`md:hidden transition-colors ${
+              className={`lg:hidden transition-colors ${
                 scrolled ? 'text-primary hover:bg-primary/10' : 'text-white hover:bg-white/10'
               }`}
             >
@@ -106,34 +106,40 @@ export default function Navigation() {
       </motion.nav>
 
       {/* Social Media Buttons - Right Side */}
-      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 flex flex-col space-y-4">
+      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden md:flex flex-col space-y-4">
         <motion.a
-          href="#"
+          href="https://wa.me/your-number"
+          target="_blank"
+          rel="noopener noreferrer"
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.5 }}
-          whileHover={{ scale: 1.1 }}
-          className="p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white hover:text-primary transition-all duration-300"
+          whileHover={{ scale: 1.1, x: -5 }}
+          className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all"
         >
           <MessageCircle className="h-5 w-5" />
         </motion.a>
         <motion.a
-          href="#"
+          href="https://instagram.com/your-handle"
+          target="_blank"
+          rel="noopener noreferrer"
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.6 }}
-          whileHover={{ scale: 1.1 }}
-          className="p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white hover:text-primary transition-all duration-300"
+          whileHover={{ scale: 1.1, x: -5 }}
+          className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all"
         >
           <Instagram className="h-5 w-5" />
         </motion.a>
         <motion.a
-          href="#"
+          href="https://facebook.com/your-page"
+          target="_blank"
+          rel="noopener noreferrer"
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.7 }}
-          whileHover={{ scale: 1.1 }}
-          className="p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white hover:text-primary transition-all duration-300"
+          whileHover={{ scale: 1.1, x: -5 }}
+          className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all"
         >
           <Facebook className="h-5 w-5" />
         </motion.a>
@@ -180,7 +186,7 @@ export default function Navigation() {
                         transition={{ delay: 0.3 + index * 0.1 }}
                         onClick={() => setIsOpen(false)}
                         onMouseEnter={() => setHoveredIndex(index)}
-                        className="block text-6xl font-light text-foreground hover:text-primary transition-all duration-300 group"
+                        className="block text-4xl md:text-6xl font-light text-foreground hover:text-primary transition-all duration-300 group font-headings"
                       >
                         <motion.span 
                           className="relative"
@@ -224,23 +230,40 @@ export default function Navigation() {
                 </motion.div>
               </div>
 
-              {/* Social links */}
+              {/* Mobile Social links */}
               <motion.div
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="absolute bottom-8 left-8 flex space-x-6"
+                className="absolute bottom-8 left-8 flex space-x-6 lg:hidden"
               >
-                {[Instagram, Facebook, MessageCircle].map((Icon, index) => (
-                  <motion.a
-                    key={index}
-                    href="#"
-                    whileHover={{ scale: 1.2, rotate: 15 }}
-                    className="p-3 rounded-full bg-card/20 backdrop-blur-md text-foreground hover:text-primary transition-colors"
-                  >
-                    <Icon className="h-6 w-6" />
-                  </motion.a>
-                ))}
+                <motion.a
+                  href="https://wa.me/your-number"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.2, rotate: 15 }}
+                  className="p-3 rounded-full bg-green-500 text-white"
+                >
+                  <MessageCircle className="h-6 w-6" />
+                </motion.a>
+                <motion.a
+                  href="https://instagram.com/your-handle"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.2, rotate: 15 }}
+                  className="p-3 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-white"
+                >
+                  <Instagram className="h-6 w-6" />
+                </motion.a>
+                <motion.a
+                  href="https://facebook.com/your-page"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.2, rotate: 15 }}
+                  className="p-3 rounded-full bg-blue-600 text-white"
+                >
+                  <Facebook className="h-6 w-6" />
+                </motion.a>
               </motion.div>
             </div>
           </motion.div>

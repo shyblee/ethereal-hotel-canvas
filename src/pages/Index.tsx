@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import IntroSection from '@/components/IntroSection';
-import FeaturesSection from '@/components/FeaturesSection';
+import GallerySection from '@/components/GallerySection';
+import AccommodationSection from '@/components/AccommodationSection';
 import DiningSection from '@/components/DiningSection';
 import DestinationsSection from '@/components/DestinationsSection';
 import ContactSection from '@/components/ContactSection';
@@ -67,8 +68,11 @@ const Index = () => {
           <section id="about">
             <IntroSection />
           </section>
-          <section id="features">
-            <FeaturesSection />
+          <section id="gallery">
+            <GallerySection />
+          </section>
+          <section id="accommodation">
+            <AccommodationSection />
           </section>
           <section id="dining">
             <DiningSection />

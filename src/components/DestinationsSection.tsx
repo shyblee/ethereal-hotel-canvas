@@ -46,77 +46,11 @@ export default function DestinationsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!sectionRef.current || !cardsRef.current) return;
-
-    // Parallax background effect
-    gsap.to('.destinations-bg', {
-      yPercent: -30,
-      ease: "none",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true
-      }
-    });
-
-    // Staggered card animations
-    const cards = cardsRef.current.children;
-    gsap.fromTo(cards, 
-      { 
-        y: 100, 
-        opacity: 0,
-        rotateX: 45,
-        scale: 0.8
-      },
-      {
-        y: 0,
-        opacity: 1,
-        rotateX: 0,
-        scale: 1,
-        duration: 1.2,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: cardsRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-
-    // Floating animation for icons
-    const icons = document.querySelectorAll('.destination-icon');
-    icons.forEach((icon, index) => {
-      gsap.to(icon, {
-        y: -10,
-        duration: 2 + index * 0.5,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.inOut"
-      });
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
+  // Removed complex animations for better performance
 
   return (
-    <section ref={sectionRef} id="destinations" className="py-20 relative overflow-hidden">
+    <section ref={sectionRef} id="destinations" className="py-20 bg-background">
       <RippleEffect containerRef={sectionRef} />
-      
-      {/* Parallax background */}
-      <div 
-        className="destinations-bg absolute inset-0 bg-cover bg-center bg-fixed"
-        style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop)',
-        }}
-      >
-        <div className="absolute inset-0 bg-background/85" />
-      </div>
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
