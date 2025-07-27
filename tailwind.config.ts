@@ -18,8 +18,8 @@ export default {
 			}
 		},
 		fontFamily: {
-			'heading': ['Inter', 'system-ui', 'sans-serif'],
-			'body': ['Inter', 'system-ui', 'sans-serif'],
+			headings: ['Inter', 'system-ui', 'sans-serif'],
+			body: ['Inter', 'system-ui', 'sans-serif'],
 		},
 		extend: {
 			backgroundImage: {
